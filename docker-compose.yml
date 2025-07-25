@@ -11,23 +11,23 @@ services:
     depends_on:
       - backend
 
-    backend:
-      build: ./backend
-      ports:
-        - "5000:5000"
-      volumes:
-        - ./backend:/app
-        - /app/node_modules
-      environment:
-       - NODE_ENV=development
-      depends_on:
-       - ml
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - ml
 
-    ml:
-      build: ./ml
-      ports:
-       - "8000:8000"
-      volumes:
-       - ./ml:app
-      environment:
-       - PYTHONUNBUFFERED=1
+  ml:
+    build: ./ml
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml:/app
+    environment:
+      - PYTHONUNBUFFERED=1
