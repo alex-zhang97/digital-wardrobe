@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.env
+.vscode
+.git
+.DS_Store
+checkpoints/
+models/
+.ipynb_checkpoints
+*.ipynb

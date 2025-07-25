@@ -1,0 +1,18 @@
+# Node.js / React / Python / general
+node_modules
+.env
+*.env
+*.log
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# System
+.vscode
+.idea
+*.swp
