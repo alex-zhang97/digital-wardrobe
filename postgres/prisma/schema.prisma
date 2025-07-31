@@ -13,3 +13,63 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// User table, 
+// Have an images table to associate images with users
+// Each image store tags, colors, and other metadata
+// User - Information:
+// id, name, email, list of images, password(hashed), miscellaneous information(date of account creation, date of birth)
+// Image - Information:
+// model view controller paradigm
+// id, url, userId(foreign key), style, material, colors, bodyRegion, function, metadata (e.g., date taken, camera settings)
+
+model User {
+  id                    String    @id @default(cuid())
+  email                 String    @unique
+  name                  String
+  images                Image[]
+  password              String
+  dateOfaccountCreation DateTime  @default(now())
+  dateOfBirth           DateTime?
+}
+
+// Image table, to store image metadata
+model Image {
+  id         String   @id @default(cuid())
+  url        String // Cloud URL or local path
+  fileName   String
+  uploadedAt DateTime @default(now())
+  embedding  Float[] // For vector search (e.g. FashionCLIP embeddings)
+
+  // Tags
+  color    String?
+  material String?
+  style    String?
+  category String? // e.g. "top", "shoes", etc.
+  tags     Tag[]
+
+  // Relations
+  outfits Outfit[] 
+  User    User?         @relation(fields: [userId], references: [id])
+  userId  String?
+
+  @@index([category])
+  @@index([color])
+  @@index([style])
+  @@index([material])
+}
+
+// Tag table, to store tags for images
+model Tag {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  images Image[]
+}
+
+// A collection of images that works together as an outfit, can be user defined or system generated
+model Outfit {
+  id        String        @id @default(cuid())
+  name      String
+  createdAt DateTime      @default(now())
+  images    Image[]
+}
