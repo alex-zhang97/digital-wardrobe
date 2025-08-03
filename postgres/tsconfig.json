@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    // … your existing settings …
+    "types": ["node"],                // ← make sure "node" is in here
+    "typeRoots": ["node_modules/@types"]  // (usually already present)
+  }
+}
