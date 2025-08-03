@@ -1,38 +1,45 @@
-version: '3.8'
-
 services:
-  backend:
-    build:
-      context: ./backend
-    volumes:
-      - ./backend:/app
-    ports:
-      - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/wardrobe
-    depends_on:
-      - db
-
   frontend:
-    build:
-      context: ./frontend
+    build: ./frontend
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
     depends_on:
       - backend
 
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - ml
+      - db
+
+  ml:
+    build: ./ml
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ml:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
   db:
     image: postgres:15
-    container_name: postgres-db
+    container_name: digital_wardrobe_db
     restart: always
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: wardrobe
+      POSTGRES_DB: digital_wardrobe
     ports:
       - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-volumes:
-  postgres-data:
