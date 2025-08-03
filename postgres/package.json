@@ -3,6 +3,7 @@
     "prisma": "^6.13.0"
   },
   "dependencies": {
-    "@prisma/client": "^6.13.0"
+    "@prisma/client": "^6.13.0",
+    "@types/node": "^24.1.0"
   }
 }
