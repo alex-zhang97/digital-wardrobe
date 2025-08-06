@@ -1,4 +1,9 @@
 import Image from "next/image";
+import prisma from "../../../postgres/lib/prisma";
+
+prisma.$connect()
+  .then(() => console.log("Connected to the database"))
+  .catch((error) => console.error("Error connecting to the database:", error));
 
 export default function Home() {
   return (
