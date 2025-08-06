@@ -25,13 +25,21 @@ services:
       - db
 
   ml:
-    build: ./ml
-    ports:
-      - "8000:8000"
+    build:
+      context: ./ml
+    image: fashionclip-ml
+    container_name: fashionclip-ml
     volumes:
       - ./ml:/app
+    working_dir: /app
+    command: python main.py test.jpg
     environment:
-      - PYTHONUNBUFFERED=1
+      - DB_HOST=your_db_host
+      - DB_USER=your_db_user
+      - DB_PASS=your_db_password
+      - DB_NAME=your_db_name
+    ports:
+      - "8000:8000"
 
   db:
     image: postgres:15

@@ -1,0 +1,6 @@
+torch==2.2.1
+torchvision==0.17.1
+transformers==4.40.2
+fashion-clip
+numpy<2.0.0
+Pillow
