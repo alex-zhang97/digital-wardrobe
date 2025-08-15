@@ -22,7 +22,10 @@ attributes = {
     "category": ["shirt", "pants", "shoes", "jacket", "dress"],
     "color": ["red", "blue", "black", "white", "green"],
     "material": ["cotton", "leather", "denim", "wool"],
-    "style": ["casual", "formal", "sporty", "vintage"]
+    "style": ["casual", "formal", "sporty", "vintage"],
+    "season": ["summer", "winter", "spring", "autumn"],
+    "occasion": ["party", "work", "casual", "outdoor"],
+    "body group": ["upper body", "lower body", "footwear", "accessories"]
 }
 
 # Predict best label for each attribute
